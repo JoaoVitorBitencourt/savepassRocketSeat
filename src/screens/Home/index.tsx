@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useFocusEffect } from '@react-navigation/native';
 
@@ -30,14 +30,24 @@ export function Home() {
 
   async function loadData() {
     const dataKey = '@savepass:logins';
+
+    const response = await AsyncStorage.getItem(dataKey);
+    const logins = response ? JSON.parse(response) : [];
+
+    setSearchListData(logins);
+    setData(logins)
+
     // Get asyncStorage data, use setSearchListData and setData
   }
 
   function handleFilterLoginData() {
+    searchText 
+    && setSearchListData(data.filter(login => login.service_name.toLowerCase().includes(searchText.toLowerCase())));
     // Filter results inside data, save with setSearchListData
   }
 
   function handleChangeInputText(text: string) {
+    setSearchText(text);
     // Update searchText value
   }
 
